@@ -1,0 +1,56 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { 
+  saveUserResponse, 
+  saveUserSession, 
+  markSessionComplete, 
+  UserResponse 
+} from '@/lib/database';
+import { generateSessionId, calculateOverlapPercentage } from '@/lib/utils';
+
+export async function POST(request: NextRequest) {
+  try {
+    const { answers } = await request.json();
+    
+    if (!answers || typeof answers !== 'object') {
+      return NextResponse.json(
+        { error: 'Invalid answers format' }, 
+        { status: 400 }
+      );
+    }
+
+    // Generate session ID
+    const sessionId = generateSessionId();
+    
+    // Save session
+    await saveUserSession(sessionId);
+    
+    // Save all responses
+    for (const questionId in answers) {
+      const response: UserResponse = {
+        sessionId,
+        questionId: parseInt(questionId),
+        answer: answers[questionId]
+      };
+      await saveUserResponse(response);
+    }
+    
+    // Calculate overlap percentage
+    const overlapPercentage = calculateOverlapPercentage(answers);
+    
+    // Mark session as complete with calculated percentage
+    await markSessionComplete(sessionId, overlapPercentage);
+    
+    return NextResponse.json({
+      sessionId,
+      overlapPercentage,
+      message: 'Responses submitted successfully'
+    });
+
+  } catch (error) {
+    console.error('Error submitting responses:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' }, 
+      { status: 500 }
+    );
+  }
+}
