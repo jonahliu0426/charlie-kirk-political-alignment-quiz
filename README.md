@@ -16,7 +16,7 @@ A Next.js web application that allows users to take a 10-question political quiz
 
 ## 🚀 Live Demo
 
-[Deploy this project to see it live!](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/political-alignment-quiz)
+[Deploy this project to see it live!](https://vercel.com/new/clone?repository-url=https://github.com/jonahliu0426/charlie-kirk-political-alignment-quiz)
 
 ## 🛠️ Tech Stack
 
@@ -53,8 +53,8 @@ The quiz covers 10 key political topics with neutrally-phrased questions:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/political-alignment-quiz.git
-   cd political-alignment-quiz
+   git clone https://github.com/jonahliu0426/charlie-kirk-political-alignment-quiz.git
+   cd charlie-kirk-political-alignment-quiz
    ```
 
 2. **Install dependencies**
@@ -79,7 +79,7 @@ The quiz covers 10 key political topics with neutrally-phrased questions:
 
 ### Deploy to Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/political-alignment-quiz)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/jonahliu0426/charlie-kirk-political-alignment-quiz)
 
 **Or manually:**
 
