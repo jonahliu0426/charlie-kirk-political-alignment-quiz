@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getDistributionData } from '@/lib/database';
+import { getDistributionData } from '@/lib/database-serverless';
 import { createDistributionData } from '@/lib/utils';
 
 export async function GET() {

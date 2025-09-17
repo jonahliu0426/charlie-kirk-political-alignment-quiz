@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserResponses, getDatabase } from '@/lib/database';
+import { getUserResponses, getDatabase } from '@/lib/database-serverless';
 import { calculateOverlapPercentage } from '@/lib/utils';
 
 export async function GET(

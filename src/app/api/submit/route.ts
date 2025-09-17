@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { 
   saveUserResponse, 
   saveUserSession, 
-  markSessionComplete, 
-  UserResponse 
-} from '@/lib/database';
+  markSessionComplete
+} from '@/lib/database-serverless';
 import { generateSessionId, calculateOverlapPercentage } from '@/lib/utils';
 
 export async function POST(request: NextRequest) {
@@ -26,12 +25,11 @@ export async function POST(request: NextRequest) {
     
     // Save all responses
     for (const questionId in answers) {
-      const response: UserResponse = {
+      await saveUserResponse({
         sessionId,
         questionId: parseInt(questionId),
         answer: answers[questionId]
-      };
-      await saveUserResponse(response);
+      });
     }
     
     // Calculate overlap percentage
