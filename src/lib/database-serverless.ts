@@ -17,8 +17,8 @@ interface UserSession {
 
 // In-memory storage (resets on each serverless function call)
 // For production, you'd want to use a database like Vercel Postgres, PlanetScale, etc.
-let responses: UserResponse[] = [];
-let sessions: UserSession[] = [];
+const responses: UserResponse[] = [];
+const sessions: UserSession[] = [];
 
 export async function saveUserResponse(response: {
   sessionId: string;
@@ -69,7 +69,7 @@ export async function getDistributionData() {
 export async function getDatabase() {
   // Mock database interface for compatibility
   return {
-    get: async (query: string, params: any[]) => {
+    get: async (query: string, params: string[]) => {
       if (query.includes('user_sessions')) {
         const sessionId = params[0];
         const session = sessions.find(s => s.id === sessionId);
