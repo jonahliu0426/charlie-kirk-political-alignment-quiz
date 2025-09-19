@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import SocialShare from './SocialShare';
 
 ChartJS.register(
   CategoryScale,
@@ -230,23 +231,20 @@ export default function Results({ sessionId }: ResultsProps) {
         </div>
       </div>
 
+      {/* Social Share Component */}
+      <SocialShare 
+        sessionId={sessionId}
+        percentage={resultsData.overlapPercentage}
+        alignmentLabel={getScoreLabel(resultsData.overlapPercentage)}
+      />
+
       {/* Action Buttons */}
-      <div className="flex justify-center space-x-4">
+      <div className="flex justify-center space-x-4 mt-6">
         <button
           onClick={() => window.location.href = '/'}
           className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 font-medium"
         >
           Take Quiz Again
-        </button>
-        <button
-          onClick={() => {
-            const url = `${window.location.origin}/results/${sessionId}`;
-            navigator.clipboard.writeText(url);
-            alert('Results link copied to clipboard!');
-          }}
-          className="px-8 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all duration-200 font-medium"
-        >
-          Share Results
         </button>
       </div>
     </div>

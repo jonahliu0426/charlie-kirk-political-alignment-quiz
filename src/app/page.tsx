@@ -81,6 +81,7 @@ export default function Home() {
               <p>• Each question covers key political issues and policies</p>
               <p>• Your responses will be compared to reference positions</p>
               <p>• See your alignment percentage and where you stand</p>
+              <p>• Share your results on social media with auto-generated images</p>
               <p>• View how your results compare to other participants</p>
             </div>
           </div>
