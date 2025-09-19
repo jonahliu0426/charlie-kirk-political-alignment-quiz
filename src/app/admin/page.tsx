@@ -148,11 +148,11 @@ export default function AdminDashboard() {
 
   // Chart data for distribution
   const distributionData = {
-    labels: Object.keys(stats.distribution),
+    labels: stats.distribution ? Object.keys(stats.distribution) : [],
     datasets: [
       {
         label: 'Participants',
-        data: Object.values(stats.distribution),
+        data: stats.distribution ? Object.values(stats.distribution) : [],
         backgroundColor: 'rgba(59, 130, 246, 0.8)',
         borderColor: 'rgba(59, 130, 246, 1)',
         borderWidth: 1,
@@ -162,10 +162,10 @@ export default function AdminDashboard() {
 
   // Pie chart for alignment levels
   const alignmentData = {
-    labels: Object.keys(stats.alignmentLevels),
+    labels: stats.alignmentLevels ? Object.keys(stats.alignmentLevels) : [],
     datasets: [
       {
-        data: Object.values(stats.alignmentLevels),
+        data: stats.alignmentLevels ? Object.values(stats.alignmentLevels) : [],
         backgroundColor: [
           '#dc2626', '#ef4444', '#f59e0b', '#3b82f6', '#10b981', '#059669'
         ],
@@ -293,15 +293,21 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {Object.entries(stats.scoreRanges).map(([range, count]) => (
+                {stats.scoreRanges ? Object.entries(stats.scoreRanges).map(([range, count]) => (
                   <tr key={range} className="border-b hover:bg-gray-50">
                     <td className="py-2 px-4">{range}</td>
                     <td className="text-right py-2 px-4">{count}</td>
                     <td className="text-right py-2 px-4">
-                      {((count / stats.totalParticipants) * 100).toFixed(1)}%
+                      {stats.totalParticipants > 0 ? ((count / stats.totalParticipants) * 100).toFixed(1) : '0.0'}%
                     </td>
                   </tr>
-                ))}
+                )) : (
+                  <tr>
+                    <td colSpan={3} className="py-4 text-center text-gray-500">
+                      No data available yet
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -310,27 +316,37 @@ export default function AdminDashboard() {
         {/* Recent Scores */}
         <div className="bg-white rounded-lg shadow p-6">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">🕒 Recent Scores (Highest to Lowest)</h3>
-          <div className="grid grid-cols-5 md:grid-cols-10 lg:grid-cols-15 gap-2">
-            {stats.allScores.slice(0, 50).map((score, index) => (
-              <div
-                key={index}
-                className={`
-                  text-center py-2 px-1 rounded text-sm font-medium
-                  ${score >= 75 ? 'bg-green-100 text-green-800' :
-                    score >= 50 ? 'bg-blue-100 text-blue-800' :
-                    score >= 25 ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-red-100 text-red-800'
-                  }
-                `}
-              >
-                {score}%
+          {stats.allScores && stats.allScores.length > 0 ? (
+            <>
+              <div className="grid grid-cols-5 md:grid-cols-10 lg:grid-cols-15 gap-2">
+                {stats.allScores.slice(0, 50).map((score, index) => (
+                  <div
+                    key={index}
+                    className={`
+                      text-center py-2 px-1 rounded text-sm font-medium
+                      ${score >= 75 ? 'bg-green-100 text-green-800' :
+                        score >= 50 ? 'bg-blue-100 text-blue-800' :
+                        score >= 25 ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }
+                    `}
+                  >
+                    {score}%
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          {stats.allScores.length > 50 && (
-            <p className="text-gray-500 text-sm mt-2">
-              Showing first 50 of {stats.allScores.length} total scores
-            </p>
+              {stats.allScores.length > 50 && (
+                <p className="text-gray-500 text-sm mt-2">
+                  Showing first 50 of {stats.allScores.length} total scores
+                </p>
+              )}
+            </>
+          ) : (
+            <div className="text-center py-8">
+              <div className="text-gray-400 text-4xl mb-2">📊</div>
+              <p className="text-gray-600">No participant scores yet</p>
+              <p className="text-gray-500 text-sm">Scores will appear here once people complete the quiz</p>
+            </div>
           )}
         </div>
       </div>

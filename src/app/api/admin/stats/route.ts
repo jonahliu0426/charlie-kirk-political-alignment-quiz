@@ -132,7 +132,7 @@ export async function GET(request: NextRequest) {
         standardDeviation
       },
       questionAnalysis,
-      allScores: allScores.sort((a, b) => b - a), // Highest to lowest
+      allScores: allScores ? allScores.sort((a, b) => b - a) : [], // Highest to lowest, with fallback
       timestamp: new Date().toISOString()
     });
 
