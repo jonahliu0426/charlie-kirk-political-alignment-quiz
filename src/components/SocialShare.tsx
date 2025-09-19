@@ -12,7 +12,7 @@ export default function SocialShare({ sessionId, percentage, alignmentLabel }: S
   const [copied, setCopied] = useState(false);
 
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-  const resultUrl = `${baseUrl}/results/${sessionId}`;
+  const shareUrl = baseUrl; // Share main domain only, not specific result page
   
   const shareText = `I got ${percentage}% alignment with Charlie Kirk's political positions! My result: ${alignmentLabel}. Take the quiz yourself:`;
   
@@ -20,44 +20,44 @@ export default function SocialShare({ sessionId, percentage, alignmentLabel }: S
     {
       name: 'Twitter/X',
       icon: '𝕏',
-      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(resultUrl)}`,
+      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
       color: 'bg-black hover:bg-gray-800'
     },
     {
       name: 'Facebook',
       icon: '📘',
-      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(resultUrl)}&quote=${encodeURIComponent(shareText)}`,
+      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`,
       color: 'bg-blue-600 hover:bg-blue-700'
     },
     {
       name: 'LinkedIn',
       icon: '💼',
-      url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(resultUrl)}&summary=${encodeURIComponent(shareText)}`,
+      url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}&summary=${encodeURIComponent(shareText)}`,
       color: 'bg-blue-700 hover:bg-blue-800'
     },
     {
       name: 'Reddit',
       icon: '🔴',
-      url: `https://reddit.com/submit?url=${encodeURIComponent(resultUrl)}&title=${encodeURIComponent(shareText)}`,
+      url: `https://reddit.com/submit?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareText)}`,
       color: 'bg-orange-600 hover:bg-orange-700'
     },
     {
       name: 'WhatsApp',
       icon: '💬',
-      url: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${resultUrl}`)}`,
+      url: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
       color: 'bg-green-600 hover:bg-green-700'
     },
     {
       name: 'Telegram',
       icon: '✈️',
-      url: `https://t.me/share/url?url=${encodeURIComponent(resultUrl)}&text=${encodeURIComponent(shareText)}`,
+      url: `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
       color: 'bg-blue-500 hover:bg-blue-600'
     }
   ];
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`${shareText} ${resultUrl}`);
+      await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -106,7 +106,7 @@ export default function SocialShare({ sessionId, percentage, alignmentLabel }: S
         <div className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"
-            value={resultUrl}
+            value={shareUrl}
             readOnly
             className="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-sm"
           />

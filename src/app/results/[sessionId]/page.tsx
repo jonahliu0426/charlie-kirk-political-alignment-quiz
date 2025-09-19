@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: ResultsPageProps) {
       openGraph: {
         title,
         description,
-        url: `${baseUrl}/results/${sessionId}`,
+        url: baseUrl, // Main domain for click-through, not specific result page
         siteName: 'Political Alignment Quiz',
         images: [
           {
