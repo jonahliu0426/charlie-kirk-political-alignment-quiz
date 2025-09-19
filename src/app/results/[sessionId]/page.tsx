@@ -1,6 +1,5 @@
 import Results from '@/components/Results';
-import { getUserResponses, getDatabase } from '@/lib/database-serverless';
-import { calculateOverlapPercentage } from '@/lib/utils';
+import { getDatabase } from '@/lib/database-serverless';
 
 interface ResultsPageProps {
   params: Promise<{

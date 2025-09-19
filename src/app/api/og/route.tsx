@@ -7,7 +7,6 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const percentage = searchParams.get('percentage') || '0';
-    const sessionId = searchParams.get('sessionId') || '';
 
     // Determine alignment level and color
     const percentageNum = parseInt(percentage);

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -271,8 +271,7 @@ export default function AdminDashboard() {
                   maintainAspectRatio: false,
                   plugins: {
                     legend: { 
-                      position: 'right',
-                      labels: { fontSize: 12 }
+                      position: 'right' as const,
                     },
                   },
                 }}

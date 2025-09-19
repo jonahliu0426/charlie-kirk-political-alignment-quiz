@@ -8,7 +8,7 @@ interface SocialShareProps {
   alignmentLabel: string;
 }
 
-export default function SocialShare({ sessionId, percentage, alignmentLabel }: SocialShareProps) {
+export default function SocialShare({ percentage, alignmentLabel }: SocialShareProps) {
   const [copied, setCopied] = useState(false);
 
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
