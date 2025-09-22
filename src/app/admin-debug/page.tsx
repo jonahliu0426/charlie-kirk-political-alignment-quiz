@@ -3,9 +3,9 @@
 import { useState } from 'react';
 
 export default function AdminDebugPage() {
-  const [debugInfo, setDebugInfo] = useState<any>(null);
-  const [statsInfo, setStatsInfo] = useState<any>(null);
-  const [adminTest, setAdminTest] = useState<any>(null);
+  const [debugInfo, setDebugInfo] = useState<Record<string, unknown> | null>(null);
+  const [statsInfo, setStatsInfo] = useState<Record<string, unknown> | null>(null);
+  const [adminTest, setAdminTest] = useState<Record<string, unknown> | null>(null);
   const [loading, setLoading] = useState(false);
 
   const testConnection = async () => {
@@ -145,7 +145,7 @@ export default function AdminDebugPage() {
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mt-6">
           <h3 className="text-lg font-semibold text-yellow-800 mb-2">🔍 What to look for:</h3>
           <ul className="text-yellow-700 space-y-1">
-            <li>• <strong>Test 1:</strong> Should show "success: true" and database version</li>
+            <li>• <strong>Test 1:</strong> Should show &quot;success: true&quot; and database version</li>
             <li>• <strong>Test 2:</strong> Should show demo data seeded and scores</li>
             <li>• <strong>Test 3:</strong> Should show full admin statistics</li>
             <li>• <strong>Status 401:</strong> Authentication issue</li>

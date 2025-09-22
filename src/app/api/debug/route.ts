@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@vercel/postgres';
 import { initializeDatabase, seedDemoData } from '@/lib/database-postgres';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     console.log('Debug endpoint called...');
     
@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Test database initialization
     await initializeDatabase();
