@@ -1,5 +1,5 @@
 import Results from '@/components/Results';
-import { getDatabase } from '@/lib/database-serverless';
+import { getDatabase } from '@/lib/persistent-storage';
 
 interface ResultsPageProps {
   params: Promise<{

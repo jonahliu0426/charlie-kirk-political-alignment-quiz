@@ -3,7 +3,7 @@ import {
   saveUserResponse, 
   saveUserSession, 
   markSessionComplete
-} from '@/lib/database-serverless';
+} from '@/lib/persistent-storage';
 import { generateSessionId, calculateOverlapPercentage } from '@/lib/utils';
 
 export async function POST(request: NextRequest) {

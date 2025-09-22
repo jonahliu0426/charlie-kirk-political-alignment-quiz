@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDistributionData } from '@/lib/database-serverless';
+import { getDistributionData, seedDemoData } from '@/lib/persistent-storage';
 
 // Simple admin key check - in production, use proper authentication
 const ADMIN_KEY = process.env.ADMIN_KEY || 'admin123';
@@ -17,6 +17,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Seed demo data if no data exists
+    await seedDemoData();
+    
     // Get all completed sessions data
     const allScores = await getDistributionData();
     
