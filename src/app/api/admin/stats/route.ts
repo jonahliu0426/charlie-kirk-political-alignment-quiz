@@ -6,8 +6,12 @@ const ADMIN_KEY = process.env.ADMIN_KEY || 'admin123';
 
 export async function GET(request: NextRequest) {
   try {
+    console.log('Admin stats endpoint called...');
+    
     // Initialize database tables if they don't exist
+    console.log('Initializing database...');
     await initializeDatabase();
+    console.log('Database initialized successfully');
     
     // Check admin authentication
     const authHeader = request.headers.get('authorization');
@@ -21,10 +25,14 @@ export async function GET(request: NextRequest) {
     }
 
     // Seed demo data if no data exists
+    console.log('Seeding demo data...');
     await seedDemoData();
+    console.log('Demo data seeded successfully');
     
     // Get all completed sessions data
+    console.log('Getting distribution data...');
     const allScores = await getDistributionData();
+    console.log('Distribution data retrieved:', allScores.length, 'scores');
     
     if (allScores.length === 0) {
       return NextResponse.json({
