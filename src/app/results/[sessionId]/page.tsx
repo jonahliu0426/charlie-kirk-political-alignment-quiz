@@ -1,5 +1,5 @@
 import Results from '@/components/Results';
-import { getDatabase } from '@/lib/persistent-storage';
+import { getSessionById } from '@/lib/database-postgres';
 
 interface ResultsPageProps {
   params: Promise<{
@@ -17,11 +17,7 @@ export async function generateMetadata({ params }: ResultsPageProps) {
   
   try {
     // Get user's results to customize meta tags
-    const database = await getDatabase();
-    const session = await database.get(
-      'SELECT * FROM user_sessions WHERE id = ?',
-      [sessionId]
-    );
+    const session = await getSessionById(sessionId);
     
     let percentage = 50; // Default fallback
     let alignmentLabel = 'Political Alignment';

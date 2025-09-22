@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getDistributionData } from '@/lib/persistent-storage';
+import { getDistributionData, initializeDatabase } from '@/lib/database-postgres';
 import { createDistributionData } from '@/lib/utils';
 
 export async function GET() {
   try {
+    // Initialize database tables if they don't exist
+    await initializeDatabase();
+    
     // Get all completed session scores
     const allScores = await getDistributionData();
     

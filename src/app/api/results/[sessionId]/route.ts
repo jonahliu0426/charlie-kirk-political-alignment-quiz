@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserResponses, getDatabase } from '@/lib/persistent-storage';
+import { getUserResponses, getSessionById, initializeDatabase } from '@/lib/database-postgres';
 import { calculateOverlapPercentage } from '@/lib/utils';
 
 export async function GET(
@@ -7,6 +7,9 @@ export async function GET(
   { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
+    // Initialize database tables if they don't exist
+    await initializeDatabase();
+    
     const { sessionId } = await params;
     
     if (!sessionId) {
@@ -17,11 +20,7 @@ export async function GET(
     }
 
     // Get session data
-    const database = await getDatabase();
-    const session = await database.get(
-      'SELECT * FROM user_sessions WHERE id = ?',
-      [sessionId]
-    );
+    const session = await getSessionById(sessionId);
     
     if (!session) {
       return NextResponse.json(

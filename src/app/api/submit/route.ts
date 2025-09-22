@@ -2,12 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { 
   saveUserResponse, 
   saveUserSession, 
-  markSessionComplete
-} from '@/lib/persistent-storage';
+  markSessionComplete,
+  initializeDatabase
+} from '@/lib/database-postgres';
 import { generateSessionId, calculateOverlapPercentage } from '@/lib/utils';
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize database tables if they don't exist
+    await initializeDatabase();
+    
     const { answers } = await request.json();
     
     if (!answers || typeof answers !== 'object') {

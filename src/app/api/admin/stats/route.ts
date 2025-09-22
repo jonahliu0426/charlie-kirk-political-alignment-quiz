@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDistributionData, seedDemoData } from '@/lib/persistent-storage';
+import { getDistributionData, seedDemoData, initializeDatabase } from '@/lib/database-postgres';
 
 // Simple admin key check - in production, use proper authentication
 const ADMIN_KEY = process.env.ADMIN_KEY || 'admin123';
 
 export async function GET(request: NextRequest) {
   try {
+    // Initialize database tables if they don't exist
+    await initializeDatabase();
+    
     // Check admin authentication
     const authHeader = request.headers.get('authorization');
     const adminKey = request.nextUrl.searchParams.get('key');
