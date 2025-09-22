@@ -33,9 +33,9 @@ export async function GET(
     const responses = await getUserResponses(sessionId);
     
     // Convert responses to the format expected by calculateOverlapPercentage
-    const answersObject = responses.reduce((acc: Record<number, number>, response: any) => ({
+    const answersObject = responses.reduce((acc: Record<number, number>, response) => ({
       ...acc,
-      [response.question_id]: response.answer
+      [response.question_id as number]: response.answer as number
     }), {} as Record<number, number>);
 
     // Calculate or get stored overlap percentage
