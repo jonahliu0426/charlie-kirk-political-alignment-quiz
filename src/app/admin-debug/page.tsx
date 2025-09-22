@@ -5,7 +5,11 @@ import { useState } from 'react';
 export default function AdminDebugPage() {
   const [debugInfo, setDebugInfo] = useState<Record<string, unknown> | null>(null);
   const [statsInfo, setStatsInfo] = useState<Record<string, unknown> | null>(null);
-  const [adminTest, setAdminTest] = useState<Record<string, unknown> | null>(null);
+  const [adminTest, setAdminTest] = useState<{
+    status: number;
+    statusText: string;
+    data: Record<string, unknown>;
+  } | null>(null);
   const [loading, setLoading] = useState(false);
 
   const testConnection = async () => {
@@ -85,9 +89,9 @@ export default function AdminDebugPage() {
           {adminTest ? (
             <div className="bg-gray-100 p-4 rounded overflow-auto">
               <div className="mb-2">
-                <strong>Status:</strong> {adminTest.status} {adminTest.statusText}
+                <strong>Status:</strong> {adminTest?.status} {adminTest?.statusText}
               </div>
-              <pre>{JSON.stringify(adminTest.data, null, 2)}</pre>
+              <pre>{JSON.stringify(adminTest?.data, null, 2)}</pre>
             </div>
           ) : (
             <p className="text-gray-500">Click &quot;Run All Tests&quot; to check admin API</p>
