@@ -63,7 +63,7 @@ export default function AdminDebugPage() {
               <pre>{JSON.stringify(debugInfo, null, 2)}</pre>
             </div>
           ) : (
-            <p className="text-gray-500">Click "Run All Tests" to check database connection</p>
+            <p className="text-gray-500">Click &quot;Run All Tests&quot; to check database connection</p>
           )}
         </div>
 
@@ -75,7 +75,7 @@ export default function AdminDebugPage() {
               <pre>{JSON.stringify(statsInfo, null, 2)}</pre>
             </div>
           ) : (
-            <p className="text-gray-500">Click "Run All Tests" to check stats functionality</p>
+            <p className="text-gray-500">Click &quot;Run All Tests&quot; to check stats functionality</p>
           )}
         </div>
 
@@ -90,7 +90,7 @@ export default function AdminDebugPage() {
               <pre>{JSON.stringify(adminTest.data, null, 2)}</pre>
             </div>
           ) : (
-            <p className="text-gray-500">Click "Run All Tests" to check admin API</p>
+            <p className="text-gray-500">Click &quot;Run All Tests&quot; to check admin API</p>
           )}
         </div>
 
